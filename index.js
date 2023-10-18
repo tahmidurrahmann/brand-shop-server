@@ -22,7 +22,6 @@ const client = new MongoClient(uri, {
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
-        // await client.connect();
 
         const productsCollection = client.db('iphoneDB').collection('iphone');
 
@@ -33,9 +32,9 @@ async function run() {
             res.send(result);
         })
 
-        app.get('/products/:brandName', async (req, res) => {
-            const brands = req.params.brandName;
-            const result = await productsCollection.find({brand: brands}).toArray();
+        app.get('/products', async (req, res) => {
+            // const brands = req.params.brandName; {brand: brands} /:brandName
+            const result = await productsCollection.find().toArray();
             res.send(result)
         })
 
