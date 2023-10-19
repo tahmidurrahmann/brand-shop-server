@@ -79,6 +79,7 @@ app.delete('/carts/:id', async (req, res) => {
     const query = {_id : new ObjectId(id)};
     const result = await cartsCollection.deleteOne(query);
     res.send(result);
+    
 })
 
 
