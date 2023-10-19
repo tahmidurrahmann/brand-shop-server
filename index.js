@@ -57,7 +57,6 @@ app.get('/products/:id', async (req, res) => {
     const id = req.params.id;
     const query = { _id: new ObjectId(id) };
     const result = await productsCollection.findOne(query);
-    console.log(result);
     res.send(result);
 })
 
@@ -68,17 +67,18 @@ app.put('/products/:id', async (req, res) => {
     const options = { upsert: true };
     const updateProduct = {
         $set: {
-            select: product.body,
             name: product.name,
             photo: product.photo,
             brand: product.brand,
             price: product.price,
+            category: product.category,
             description: product.description,
             rating: product.rating,
         }
     }
     const result = await productsCollection.updateOne(filter, updateProduct, options);
     res.send(result);
+    console.log(product.category, result);
 })
 
 // carts
